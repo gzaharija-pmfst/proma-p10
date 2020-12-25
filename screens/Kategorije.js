@@ -1,10 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 const Kategorije = (props) => {
+  console.log(props);
   return (
     <View style={stil.ekran}>
       <Text>Ekran za Kategorije</Text>
+      <Button
+        title="Pogledaj recepte!"
+        onPress={() => {
+          props.navigation.navigate("JednaKategorija");
+        }}
+      />
     </View>
   );
 };

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 
+import ReceptiNavigacija from "./navigacija/ReceptiNavigacija";
+
 const ucitajFontove = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
@@ -25,9 +27,7 @@ export default function App() {
   }
 
   return (
-    <View>
-      <Text>Glavni dio aplikacije</Text>
-    </View>
+   <ReceptiNavigacija />
   );
 }
 

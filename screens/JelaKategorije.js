@@ -1,10 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 const JelaKategorije = (props) => {
   return (
     <View style={stil.ekran}>
       <Text>Ekran za prikaz svih jela jedne kategorije</Text>
+      <Button
+        title="Pogledaj detalje recepta!"
+        onPress={() => {
+          props.navigation.navigate("Detalji");
+        }}
+      />
+      <Button
+        title="Povratak"
+        onPress={() => {
+          props.navigation.goBack();
+          // props.navigation.pop();
+        }}
+      />
     </View>
   );
 };
@@ -17,4 +30,4 @@ const stil = StyleSheet.create({
   },
 });
 
-export default JelaKategorije
+export default JelaKategorije;
