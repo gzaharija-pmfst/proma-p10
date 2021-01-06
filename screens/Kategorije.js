@@ -9,23 +9,21 @@ import {
 } from "react-native";
 
 import { KATEGORIJE } from "../data/test-podaci";
+import GridKartica from "../components/GridKartica";
 import Boje from "../constants/Boje";
 
 const Kategorije = (props) => {
   const renderGrid = (podaci) => {
     return (
-      <TouchableOpacity
-        style={stil.gridElement}
-        onPress={() => {
-          props.navigation.navigate("JednaKategorija",{
-            idKategorije: podaci.item.id
+      <GridKartica
+        naziv={podaci.item.naziv}
+        boja={podaci.item.boja}
+        odabir={() => {
+          props.navigation.navigate("JednaKategorija", {
+            idKategorije: podaci.item.id,
           });
         }}
-      >
-        <View>
-          <Text>{podaci.item.naziv}</Text>
-        </View>
-      </TouchableOpacity>
+      />
     );
   };
 
@@ -45,8 +43,8 @@ const stil = StyleSheet.create({
     borderColor: Boje.naglasak,
     borderWidth: 2,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

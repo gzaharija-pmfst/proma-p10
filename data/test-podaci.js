@@ -8,7 +8,7 @@ export const KATEGORIJE = [
   new Kategorija('c5', 'Lagana jela', '#368dff'),
   new Kategorija('c6', 'Egzotična', '#41d95d'),
   new Kategorija('c7', 'Doručak', '#9eecff'),
-  new Kategorija('c8', 'Azijska', '#bjffb0'),
+  new Kategorija('c8', 'Azijska', '#b0ffb0'),
   new Kategorija('c9', 'Francuska', '#ffc7ff'),
   new Kategorija('c10', 'Ljetna', '#47fced'),
 ]
