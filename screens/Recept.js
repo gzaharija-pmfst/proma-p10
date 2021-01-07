@@ -1,10 +1,16 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
+import { RECEPTI } from '../data/test-podaci'
+
 const Recept = (props) => {
+  const idRecepta = props.navigation.getParam('receptId')
+  const odabrani = RECEPTI.find(rec => rec.id === idRecepta)
   return (
     <View style={stil.ekran}>
       <Text>Ekran za prizak detalja jednog recepta</Text>
+      <Text>ID recepta: {idRecepta}</Text>
+      <Text>{odabrani.naziv}</Text>
       <Button
         title="Povratak na kategorije"
         onPress={() => {
@@ -14,6 +20,14 @@ const Recept = (props) => {
       />
     </View>
   );
+}
+
+Recept.navigationOptions = (navigationData) => {
+  const idRecepta = navigationData.navigation.getParam('receptId')
+  const odabrani = RECEPTI.find(rec => rec.id === idRecepta)
+  return {
+    headerTitle: odabrani.naziv
+  }
 }
 
 const stil = StyleSheet.create({
