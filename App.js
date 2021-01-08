@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { LogBox, StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import { enableScreens } from "react-native-screens";
 
 import ReceptiNavigacija from "./navigacija/ReceptiNavigacija";
 
+LogBox.ignoreAllLogs(true);
 enableScreens();
 
 const ucitajFontove = () => {
