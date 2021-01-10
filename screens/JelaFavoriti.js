@@ -9,6 +9,10 @@ const JelaFavoriti = (props) => {
   );
 }
 
+JelaFavoriti.navigationOptions = {
+  headerTitle: 'Omiljena jela'
+}
+
 const stil = StyleSheet.create({
   ekran: {
     flex: 1,

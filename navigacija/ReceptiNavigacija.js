@@ -12,6 +12,15 @@ import Recept from "../screens/Recept";
 import JelaFavoriti from "../screens/JelaFavoriti";
 import Boje from "../constants/Boje";
 
+const stackOpcije = {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: Boje.glavna,
+    },
+    headerTintColor: "white",
+  },
+};
+
 const ReceptiNavigacija = createStackNavigator(
   {
     Kategorije: {
@@ -25,14 +34,15 @@ const ReceptiNavigacija = createStackNavigator(
     },
     Detalji: Recept,
   },
+  stackOpcije
+);
+
+const FavoritiNavigacija = createStackNavigator(
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Boje.glavna,
-      },
-      headerTintColor: "white",
-    },
-  }
+    Favoriti: JelaFavoriti,
+    Detalji: Recept,
+  },
+  stackOpcije
 );
 
 const tabEkrani = {
@@ -41,45 +51,33 @@ const tabEkrani = {
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return (
-          <Ionicons
-            name="ios-restaurant"
-            size={25}
-            color={tabInfo.tintColor}
-          />
+          <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
         );
       },
     },
   },
   Favoriti: {
-    screen: JelaFavoriti,
+    screen: FavoritiNavigacija,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return (
-          <Ionicons
-            name="ios-star"
-            size={25}
-            color={tabInfo.tintColor}
-          />
-        );
+        return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
       },
     },
   },
-}
+};
 const ReceptiTabNavigacija =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator(tabEkrani, {
-      activeColor: 'white',
-      shifting: true
-    })
-    : createBottomTabNavigator(tabEkrani,
-        {
-          tabBarOptions: {
-            activeBackgroundColor: "#7ddb8e",
-            inactiveBackgroundColor: "#db7d7d",
-            activeTintColor: "white",
-            inactiveTintColor: "black",
-          },
-        }
-      );
+        activeColor: "white",
+        shifting: true,
+      })
+    : createBottomTabNavigator(tabEkrani, {
+        tabBarOptions: {
+          activeBackgroundColor: "#7ddb8e",
+          inactiveBackgroundColor: "#db7d7d",
+          activeTintColor: "white",
+          inactiveTintColor: "black",
+        },
+      });
 
 export default createAppContainer(ReceptiTabNavigacija);
