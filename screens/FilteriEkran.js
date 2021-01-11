@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, View, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import NavButton from "../components/NavButton";
@@ -19,20 +19,28 @@ const FilterSwitch = (props) => {
 };
 
 const FilteriEkran = (props) => {
+  // Destrukturiramo svojstvo
+  const { navigation } = props;
+
   const [bezGlutena, postaviGluten] = useState(false);
   const [bezLaktoze, postaviLaktozu] = useState(false);
   const [vegansko, postaviVegan] = useState(false);
   const [vegetarijnsko, postaviVeget] = useState(false);
 
-  const spremiFiltere = () => {
+  const spremiFiltere = useCallback(() => {
     const odabraniFilteri = {
-      bezLaktoze: bezLaktoze,
-      bezGlutena: bezGlutena,
-      vegetarijnsko: vegetarijnsko,
-      vegansko: vegetarijnsko,
+      bezLaktoze,
+      bezGlutena,
+      vegetarijnsko,
+      vegansko,
     };
     console.log(odabraniFilteri);
-  };
+  }, [bezLaktoze, bezGlutena, vegetarijnsko, vegansko ]);
+
+  useEffect(() => {
+    navigation.setParams({ spremi: spremiFiltere });
+  }, [spremiFiltere]);
+
   return (
     <View style={stil.ekran}>
       <Text style={stil.naslov}>Dostpuni filteri/ograničenja</Text>
@@ -82,10 +90,7 @@ FilteriEkran.navigationOptions = (navData) => {
           <Item
             title="Spremi"
             iconName="save"
-            onPress={() => {
-              console.log("Spremam filtere");
-              spremiFiltere();
-            }}
+            onPress={navData.navigation.getParam("spremi")}
           />
         </HeaderButtons>
       );
