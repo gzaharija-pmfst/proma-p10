@@ -7,9 +7,11 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { KATEGORIJE } from "../data/test-podaci";
 import GridKartica from "../components/GridKartica";
+import NavButton from "../components/NavButton";
 import Boje from "../constants/Boje";
 
 const Kategorije = (props) => {
@@ -28,6 +30,25 @@ const Kategorije = (props) => {
   };
 
   return <FlatList data={KATEGORIJE} numColumns={2} renderItem={renderGrid} />;
+};
+
+Kategorije.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Sve kategorije",
+    headerLeft: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={NavButton}>
+          <Item
+            title="Izbornik"
+            iconName="menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      );
+    },
+  };
 };
 
 const stil = StyleSheet.create({

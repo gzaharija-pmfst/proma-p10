@@ -1,15 +1,17 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import { Ionicons } from "@expo/vector-icons";
 import { Platform } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { Ionicons } from "@expo/vector-icons";
 
 import Kategorije from "../screens/Kategorije";
 import JelaKategorije from "../screens/JelaKategorije";
 import Recept from "../screens/Recept";
 import JelaFavoriti from "../screens/JelaFavoriti";
+import FilteriEkran from "../screens/FilteriEkran";
 import Boje from "../constants/Boje";
 
 const stackOpcije = {
@@ -80,4 +82,18 @@ const ReceptiTabNavigacija =
         },
       });
 
-export default createAppContainer(ReceptiTabNavigacija);
+const FilteriStack = createStackNavigator({
+  Filteri: FilteriEkran,
+});
+
+const AppNavigacija = createDrawerNavigator(
+  {
+    TabFavoriti: ReceptiTabNavigacija,
+    Filteri: FilteriStack,
+  },
+  {
+    // POSTAVKE
+  }
+);
+
+export default createAppContainer(AppNavigacija);

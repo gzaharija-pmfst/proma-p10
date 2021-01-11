@@ -1,17 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import ReceptiLista from "../components/ReceptiLista";
+import { RECEPTI } from "../data/test-podaci";
 
 const JelaFavoriti = (props) => {
+  const favRecepti = RECEPTI.filter((r) => r.id === "r1" || r.id === "r2");
   return (
-    <View style={stil.ekran}>
-      <Text>Ekran za prizak svih jela iz favorita</Text>
-    </View>
+    <ReceptiLista listaPodaci={favRecepti} navigation={props.navigation} />
   );
-}
+};
 
 JelaFavoriti.navigationOptions = {
-  headerTitle: 'Omiljena jela'
-}
+  headerTitle: "Omiljena jela",
+};
 
 const stil = StyleSheet.create({
   ekran: {
@@ -21,4 +22,4 @@ const stil = StyleSheet.create({
   },
 });
 
-export default JelaFavoriti
+export default JelaFavoriti;
