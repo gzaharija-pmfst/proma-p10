@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { ColorPropType, Platform } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -33,9 +33,10 @@ const ReceptiNavigacija = createStackNavigator(
       screen: JelaKategorije,
     },
     Detalji: Recept,
-  },{
-    defaultNavigationOptions: stackOpcije
-  }  
+  },
+  {
+    defaultNavigationOptions: stackOpcije,
+  }
 );
 
 const FavoritiNavigacija = createStackNavigator(
@@ -44,7 +45,7 @@ const FavoritiNavigacija = createStackNavigator(
     Detalji: Recept,
   },
   {
-    defaultNavigationOptions: stackOpcije
+    defaultNavigationOptions: stackOpcije,
   }
 );
 
@@ -88,17 +89,34 @@ const FilteriStack = createStackNavigator(
     Filteri: FilteriEkran,
   },
   {
-    defaultNavigationOptions: stackOpcije
+    defaultNavigationOptions: stackOpcije,
   }
 );
 
 const AppNavigacija = createDrawerNavigator(
   {
-    TabFavoriti: ReceptiTabNavigacija,
-    Filteri: FilteriStack,
+    TabFavoriti: {
+      screen: ReceptiTabNavigacija,
+      navigationOptions: {
+        drawerLabel: "Recepti",
+      },
+    },
+    Filteri: {
+      screen: FilteriStack,
+      navigationOptions: {
+        drawerLabel: "Filteri jela",
+      },
+    },
   },
   {
-    // POSTAVKE
+    contentOptions: {
+      activeTintColor: Boje.naglasak,
+      labelStyle: {
+        fontFamily: 'raleway',
+        fontWeight : 'normal',
+        fontSize: 25 
+      }
+    }
   }
 );
 
