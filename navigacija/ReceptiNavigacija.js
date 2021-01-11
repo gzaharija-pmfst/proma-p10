@@ -15,12 +15,10 @@ import FilteriEkran from "../screens/FilteriEkran";
 import Boje from "../constants/Boje";
 
 const stackOpcije = {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: Boje.glavna,
-    },
-    headerTintColor: "white",
+  headerStyle: {
+    backgroundColor: Boje.glavna,
   },
+  headerTintColor: "white",
 };
 
 const ReceptiNavigacija = createStackNavigator(
@@ -35,8 +33,9 @@ const ReceptiNavigacija = createStackNavigator(
       screen: JelaKategorije,
     },
     Detalji: Recept,
-  },
-  stackOpcije
+  },{
+    defaultNavigationOptions: stackOpcije
+  }  
 );
 
 const FavoritiNavigacija = createStackNavigator(
@@ -44,7 +43,9 @@ const FavoritiNavigacija = createStackNavigator(
     Favoriti: JelaFavoriti,
     Detalji: Recept,
   },
-  stackOpcije
+  {
+    defaultNavigationOptions: stackOpcije
+  }
 );
 
 const tabEkrani = {
@@ -82,9 +83,14 @@ const ReceptiTabNavigacija =
         },
       });
 
-const FilteriStack = createStackNavigator({
-  Filteri: FilteriEkran,
-});
+const FilteriStack = createStackNavigator(
+  {
+    Filteri: FilteriEkran,
+  },
+  {
+    defaultNavigationOptions: stackOpcije
+  }
+);
 
 const AppNavigacija = createDrawerNavigator(
   {

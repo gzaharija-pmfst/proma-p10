@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ReceptiLista from "../components/ReceptiLista";
 import { RECEPTI } from "../data/test-podaci";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import NavButton from "../components/NavButton";
 
 const JelaFavoriti = (props) => {
   const favRecepti = RECEPTI.filter((r) => r.id === "r1" || r.id === "r2");
@@ -10,8 +12,23 @@ const JelaFavoriti = (props) => {
   );
 };
 
-JelaFavoriti.navigationOptions = {
-  headerTitle: "Omiljena jela",
+JelaFavoriti.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Omiljena jela",
+    headerLeft: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={NavButton}>
+          <Item
+            title="Izbornik"
+            iconName="menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      );
+    },
+  };
 };
 
 const stil = StyleSheet.create({

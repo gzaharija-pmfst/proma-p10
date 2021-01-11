@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import NavButton from "../components/NavButton";
 
 const FilteriEkran = (props) => {
   return (
@@ -8,6 +10,25 @@ const FilteriEkran = (props) => {
     </View>
   );
 }
+
+FilteriEkran.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Filtriraj jela",
+    headerLeft: () => {
+      return (
+        <HeaderButtons HeaderButtonComponent={NavButton}>
+          <Item
+            title="Izbornik"
+            iconName="menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      );
+    },
+  };
+};
 
 const stil = StyleSheet.create({
   ekran: {
