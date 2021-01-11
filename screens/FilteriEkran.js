@@ -23,6 +23,16 @@ const FilteriEkran = (props) => {
   const [bezLaktoze, postaviLaktozu] = useState(false);
   const [vegansko, postaviVegan] = useState(false);
   const [vegetarijnsko, postaviVeget] = useState(false);
+
+  const spremiFiltere = () => {
+    const odabraniFilteri = {
+      bezLaktoze: bezLaktoze,
+      bezGlutena: bezGlutena,
+      vegetarijnsko: vegetarijnsko,
+      vegansko: vegetarijnsko,
+    };
+    console.log(odabraniFilteri);
+  };
   return (
     <View style={stil.ekran}>
       <Text style={stil.naslov}>Dostpuni filteri/ograničenja</Text>
@@ -74,6 +84,7 @@ FilteriEkran.navigationOptions = (navData) => {
             iconName="save"
             onPress={() => {
               console.log("Spremam filtere");
+              spremiFiltere();
             }}
           />
         </HeaderButtons>
@@ -98,7 +109,7 @@ const stil = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "80%",
-    marginBottom: 20
+    marginBottom: 20,
   },
 });
 
