@@ -29,9 +29,9 @@ const Recept = (props) => {
 
   const odabrani = sviRecepti.find((rec) => rec.id === idRecepta);
 
-  useEffect(() => {
+/*   useEffect(() => {
     props.navigation.setParams({ naziv: odabrani.naziv });
-  }, [odabrani]);
+  }, [odabrani]); */
 
   return (
     <ScrollView>

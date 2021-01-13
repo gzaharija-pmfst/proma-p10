@@ -12,6 +12,7 @@ const ReceptiLista = (props) => {
             routeName: "Detalji",
             params: {
               receptId: recept.item.id,
+              naziv: recept.item.naziv
             },
           });
         }}
