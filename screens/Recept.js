@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   Button,
   StyleSheet,
@@ -10,21 +11,28 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import NavButton from "../components/NavButton";
 
-import { RECEPTI } from "../data/test-podaci";
+//import { RECEPTI } from "../data/test-podaci";
 
 // Odvajamo prikaz elementa u posebnu komponentu
 // Koristimo je samo ovdje pa nema potrebe za novom datotekom
 const ElementListe = (props) => {
   return (
     <View style={stil.element}>
-      <Text>{props.children}</Text> 
+      <Text>{props.children}</Text>
     </View>
-  )
-}
+  );
+};
 
 const Recept = (props) => {
+  const sviRecepti = useSelector((state) => state.recepti.recepti);
   const idRecepta = props.navigation.getParam("receptId");
-  const odabrani = RECEPTI.find((rec) => rec.id === idRecepta);
+
+  const odabrani = sviRecepti.find((rec) => rec.id === idRecepta);
+
+  useEffect(() => {
+    props.navigation.setParams({ naziv: odabrani.naziv });
+  }, [odabrani]);
+
   return (
     <ScrollView>
       <Image style={stil.slika} source={{ uri: odabrani.urlSlike }} />
@@ -47,9 +55,10 @@ const Recept = (props) => {
 
 Recept.navigationOptions = (navigationData) => {
   const idRecepta = navigationData.navigation.getParam("receptId");
-  const odabrani = RECEPTI.find((rec) => rec.id === idRecepta);
+  //const odabrani = RECEPTI.find((rec) => rec.id === idRecepta);
+  const naslov = navigationData.navigation.getParam("naziv");
   return {
-    headerTitle: odabrani.naziv,
+    headerTitle: naslov,
     headerRight: () => {
       return (
         <HeaderButtons HeaderButtonComponent={NavButton}>
@@ -81,13 +90,13 @@ const stil = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
   },
-  element:{
+  element: {
     marginVertical: 5,
     marginHorizontal: 20,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 
 export default Recept;
