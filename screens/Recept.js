@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import NavButton from "../components/NavButton";
+import { promjenaFavorita } from "../store/actions/recepti";
 
 //import { RECEPTI } from "../data/test-podaci";
 
@@ -29,9 +30,15 @@ const Recept = (props) => {
 
   const odabrani = sviRecepti.find((rec) => rec.id === idRecepta);
 
-/*   useEffect(() => {
-    props.navigation.setParams({ naziv: odabrani.naziv });
-  }, [odabrani]); */
+  const dispatch = useDispatch();
+
+  const favHandler = useCallback(() => {
+    dispatch(promjenaFavorita(idRecepta));
+  }, [dispatch, idRecepta]);
+
+  useEffect(() => {
+    props.navigation.setParams({ promFavorit: favHandler });
+  }, [favHandler]);
 
   return (
     <ScrollView>
@@ -54,9 +61,10 @@ const Recept = (props) => {
 };
 
 Recept.navigationOptions = (navigationData) => {
-  const idRecepta = navigationData.navigation.getParam("receptId");
+  //const idRecepta = navigationData.navigation.getParam("receptId");
   //const odabrani = RECEPTI.find((rec) => rec.id === idRecepta);
   const naslov = navigationData.navigation.getParam("naziv");
+  const promFavorit = navigationData.navigation.getParam('promFavorit')
   return {
     headerTitle: naslov,
     headerRight: () => {
@@ -65,9 +73,7 @@ Recept.navigationOptions = (navigationData) => {
           <Item
             title="Favorit"
             iconName="ios-star"
-            onPress={() => {
-              console.log("Recept označen kao favorit");
-            }}
+            onPress={promFavorit}
           />
         </HeaderButtons>
       );
