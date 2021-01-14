@@ -1,9 +1,13 @@
 import React from "react";
 import PrikazRecepta from "../components/PrikazRecepta";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 
 const ReceptiLista = (props) => {
+  const fav = useSelector(state => state.recepti.favoritRecepti)
+ 
   const prikaziRecept = (recept) => {
+    const favStatus = fav.some(r => r.id === recept.item.id)
     return (
       <PrikazRecepta
         naziv={recept.item.naziv}
@@ -12,7 +16,8 @@ const ReceptiLista = (props) => {
             routeName: "Detalji",
             params: {
               receptId: recept.item.id,
-              naziv: recept.item.naziv
+              naziv: recept.item.naziv,
+              favStatus: favStatus
             },
           });
         }}

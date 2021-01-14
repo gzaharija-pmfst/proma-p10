@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, View, Switch, Platform } from "react-native";
+import { useDispatch} from 'react-redux'
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import NavButton from "../components/NavButton";
 import Boje from "../constants/Boje";
+import {postaviFiltere} from '../store/actions/recepti'
 
 const FilterSwitch = (props) => {
   return (
@@ -25,17 +27,19 @@ const FilteriEkran = (props) => {
   const [bezGlutena, postaviGluten] = useState(false);
   const [bezLaktoze, postaviLaktozu] = useState(false);
   const [vegansko, postaviVegan] = useState(false);
-  const [vegetarijnsko, postaviVeget] = useState(false);
+  const [vegetarijansko, postaviVeget] = useState(false);
+
+  const dispatch = useDispatch()
 
   const spremiFiltere = useCallback(() => {
     const odabraniFilteri = {
       bezLaktoze,
       bezGlutena,
-      vegetarijnsko,
+      vegetarijansko,
       vegansko,
     };
-    console.log(odabraniFilteri);
-  }, [bezLaktoze, bezGlutena, vegetarijnsko, vegansko ]);
+    dispatch(postaviFiltere(odabraniFilteri))
+  }, [bezLaktoze, bezGlutena, vegetarijansko, vegansko, dispatch ]);
 
   useEffect(() => {
     navigation.setParams({ spremi: spremiFiltere });
@@ -61,7 +65,7 @@ const FilteriEkran = (props) => {
       />
       <FilterSwitch
         naslov="Vegetarijansko"
-        stanje={vegetarijnsko}
+        stanje={vegetarijansko}
         promjena={(nova) => postaviVeget(nova)}
       />
     </View>

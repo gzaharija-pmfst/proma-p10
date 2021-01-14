@@ -27,6 +27,9 @@ const ElementListe = (props) => {
 const Recept = (props) => {
   const sviRecepti = useSelector((state) => state.recepti.recepti);
   const idRecepta = props.navigation.getParam("receptId");
+  const statusFavorit = useSelector((state) =>
+    state.recepti.favoritRecepti.some((r) => r.id === idRecepta)
+  );
 
   const odabrani = sviRecepti.find((rec) => rec.id === idRecepta);
 
@@ -39,6 +42,10 @@ const Recept = (props) => {
   useEffect(() => {
     props.navigation.setParams({ promFavorit: favHandler });
   }, [favHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({favStatus: statusFavorit})
+  }, [statusFavorit])
 
   return (
     <ScrollView>
@@ -64,17 +71,17 @@ Recept.navigationOptions = (navigationData) => {
   //const idRecepta = navigationData.navigation.getParam("receptId");
   //const odabrani = RECEPTI.find((rec) => rec.id === idRecepta);
   const naslov = navigationData.navigation.getParam("naziv");
-  const promFavorit = navigationData.navigation.getParam('promFavorit')
+  const promFavorit = navigationData.navigation.getParam("promFavorit");
+  const favStatus = navigationData.navigation.getParam('favStatus')
   return {
     headerTitle: naslov,
     headerRight: () => {
       return (
         <HeaderButtons HeaderButtonComponent={NavButton}>
-          <Item
-            title="Favorit"
-            iconName="ios-star"
-            onPress={promFavorit}
-          />
+          <Item 
+          title="Favorit" 
+          iconName= {favStatus ? "ios-star" : "ios-star-outline"} 
+          onPress={promFavorit} />
         </HeaderButtons>
       );
     },

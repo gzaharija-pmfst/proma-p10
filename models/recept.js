@@ -11,7 +11,7 @@ class Recept {
     koraci,
     bezGlutena,
     vegansko,
-    vegetarijnsko,
+    vegetarijansko,
     bezLaktoze
   ) {
     this.id = id;
@@ -25,7 +25,7 @@ class Recept {
     this.koraci = koraci;
     this.bezGlutena = bezGlutena;
     this.vegansko = vegansko;
-    this.vegetarijnsko = vegetarijnsko;
+    this.vegetarijansko = vegetarijansko;
     this.bezLaktoze = bezLaktoze;
   }
 }

@@ -7,7 +7,15 @@ import NavButton from "../components/NavButton";
 
 const JelaFavoriti = (props) => {
   const favRecepti = useSelector(state => state.recepti.favoritRecepti)
-  //const favRecepti = RECEPTI.filter((r) => r.id === "r1" || r.id === "r2");
+
+  if (favRecepti.length === 0 || !favRecepti) {
+    return (
+      <View style={stil.ekran}>
+        <Text>Nemate omiljenih recepata!</Text>
+        <Text>Istražite popis recepata i dodajte svoje favorite</Text>
+      </View>
+    )
+  }
   return (
     <ReceptiLista listaPodaci={favRecepti} navigation={props.navigation} />
   );

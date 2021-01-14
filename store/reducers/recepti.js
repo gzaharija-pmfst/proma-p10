@@ -1,5 +1,5 @@
 import { RECEPTI } from "../../data/test-podaci";
-import { PROMJENA_FAVORITA } from "../actions/recepti";
+import { PROMJENA_FAVORITA, POSTAVI_FILTERE } from "../actions/recepti";
 
 const pocetnoStanje = {
   recepti: RECEPTI,
@@ -24,6 +24,24 @@ const receptReducer = (state = pocetnoStanje, action) => {
           favoritRecepti: state.favoritRecepti.concat(recept),
         };
       }
+    case POSTAVI_FILTERE:
+      const filteri = action.filteri
+      const noviRecepti = state.recepti.filter(recept =>{
+        if (filteri.bezGlutena && !recept.bezGlutena){
+          return false
+        }
+        if (filteri.bezLaktoze && !recept.bezLaktoze){
+          return false
+        }
+        if (filteri.vegansko && !recept.vegansko){
+          return false
+        }
+        if (filteri.vegetarijansko && !recept.vegetarijansko){
+          return false
+        }
+        return true
+      })
+      return {...state, filterRecepti: noviRecepti}
     default:
       return state;
   }
